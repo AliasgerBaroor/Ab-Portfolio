@@ -1,0 +1,106 @@
+:root {
+    --bg-lightblack: #2e2b2b;
+    --bg-sidemenu: #0d0c0c;
+    --bg-filetree: #121212;
+    --bg-editor: #1a1a1a;
+    --color-green: #a9dc76;
+    --color-cyan: #5ad4e6;
+    --color-lightblue: #c8e1ff;
+    --color-blue: #189fff;
+    --color-purple: #a5a5f0;
+    --color-red: #d63f2f;
+    --color-gray: #8b888f;
+    --color-yellow: #ffd700;
+    --color-pink: #da70d6;
+    --color-white: #d7d7d7;
+    --color-brown: #8e5c42;
+    --color-orange: #e2763d;
+}
+
+::selection {
+    background-color: rgba(255,255,255, 0.5);
+    color: #000;
+  }
+  
+  ::-moz-selection {
+    background-color: rgba(255,255,255, 0.5);
+    color: #000;
+  }
+  
+
+/* heights */
+
+html,
+body {
+  height: 100%; 
+  margin: 0;
+}
+
+.root-container {
+  height: 100%;
+}
+
+.bg-sidemenu,
+.bg-filetree,
+.bg-editor {
+  height: 100%;
+}
+
+/* BG */
+
+.bg-sidemenu {
+    background: var(--bg-sidemenu);
+    color: var(--color-white);
+}
+.bg-filetree {
+    background: var(--bg-filetree);
+    color: var(--color-white);
+}
+
+.bg-editor {
+    background-color: var(--bg-editor);
+    color: var(--color-white);
+}
+/* Text */
+.text-green {
+    color: var(--color-green);
+}
+
+.text-cyan {
+    color: var(--color-cyan);
+}
+
+.text-lightblue {
+    color: var(--color-lightblue);
+}
+.text-blue {
+    color: var(--color-blue);
+}
+
+.text-purple {
+    color: var(--color-purple);
+}
+
+.text-red {
+    color: var(--color-red);
+}
+
+.text-gray {
+    color: var(--color-gray);
+}
+.text-white {
+    color: var(--color-white);
+}
+
+.text-yellow {
+    color: var(--color-yellow);
+}
+.text-pink {
+    color: var(--color-pink);
+}
+.text-brown {
+    color: var(--color-brown);
+}
+.text-orange {
+    color: var(--color-orange);
+}
