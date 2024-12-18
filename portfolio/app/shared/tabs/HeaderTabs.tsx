@@ -1,4 +1,4 @@
-import { Heading, Tabs, Link, Box, Highlight } from "@chakra-ui/react"
+import { Heading, Tabs, Link, Box, Highlight, Flex } from "@chakra-ui/react"
 import { useState } from "react";
 import { GiPartyPopper } from "react-icons/gi";
 import { FaStar, FaPhoneAlt } from "react-icons/fa";
@@ -9,10 +9,14 @@ import { CloseButton } from "~/components/ui/close-button";
 import { IconType } from "react-icons";
 import EditorEmptyState from "../EditorEmptyState";
 import { DataListItem, DataListRoot } from "~/components/ui/data-list"
+import { Status } from "~/components/ui/status"
 
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
+import TypingEffect from "../TypingText";
+import Github from "../Icon-buttons/Github";
+import Linkedin from "../Icon-buttons/LinkedIn";
 
 type Item = {
   id: string;
@@ -29,8 +33,8 @@ const iconMapping: { [key: string]: IconType } = {
 };
 
 const items: Item[] = [
-  { id: "1", title: "Welcome", content: "For simpler version of portfolio visit:", icon: "GiPartyPopper" },
-  { id: "2", title: "About", content: "Tab Content", icon: "FaStar" },
+  { id: "1", title: "About", content: "Tab Content", icon: "FaStar" },
+  { id: "2", title: "Welcome", content: "For simpler version of portfolio visit:", icon: "GiPartyPopper" },
 ]
 
 
@@ -76,7 +80,7 @@ const HeaderTabs = () => {
       [selectedTab!]: newValue,
     }));
   };
-  
+
   return (
     <Tabs.Root value={selectedTab}
       onValueChange={(e) => setSelectedTab(e.value)}
@@ -148,48 +152,61 @@ const HeaderTabs = () => {
                 <EditorEmptyState />
               </Box>
             ) : item.title === "About" ? (
-              <Heading>About page</Heading>
+              <Box>
+              <Heading size="5xl">Aliasger Bohra 👋</Heading>
+              <Heading size="lg" display={"flex"}>Looking for work <Flex ml={2}>
+        <Status value="warning" me={2} /> /
+        <TypingEffect />
+      </Flex></Heading>
+      <Flex alignItems={"center"}>
+      <Github />
+      <Linkedin />
+      <Button onClick={addTab} ms={2} rounded={24} variant={"subtle"} size={"xs"}>Contact me -&gt;</Button>
+      </Flex>
+
+      {/* https://github.com/AliasgerBaroor */}
+            </Box>
             ) : (
-<Box
-  textAlign={"start"}
-  p={4}
->
-  <Heading size={"2xl"} textAlign={"center"}>Contact Me</Heading>
-  <Heading
-    size={"lg"}
-    maxWidth={"700px"}
-    mt={2}
-    mb={8}
-    lineHeight={"1.5"}
-  >
-    <Highlight
-      query={["Code editor", "feedback", "portfolio", "projects"]}
-      styles={{ px: "0.5", color: "var(--color-cyan)" }}
-    >
-      Reach out using the Code editor below for inquiries (type your message below), 
-      or share your valuable feedback about my portfolio and projects.
-    </Highlight>
-  </Heading>
-  <AceEditor
-    value={fileContents[selectedTab!] || ""}
-    mode="javascript"
-    theme="monokai"
-    width="100%"
-    height="200px"
-    onChange={handleEditorChange}
-    name="CodeEditor"
-  />
-  <Heading size={"xl"} my={4}>Example</Heading>
-  <DataListRoot orientation="horizontal">
-    {stats.map((item) => (
-      <DataListItem key={item.label} maxW="xs" label={
-        <Box color="var(--color-gray)" fontSize={"lg"} fontWeight="bold">
-          {item.label}
-        </Box>
-      } value={item.value} />
-    ))}
-  </DataListRoot>
-</Box>
+              <Box
+                textAlign={"start"}
+                p={4}
+              >
+                <Heading size={"2xl"} textAlign={"center"}>Contact Me</Heading>
+                <Heading
+                  size={"lg"}
+                  maxWidth={"700px"}
+                  mt={2}
+                  mb={8}
+                  lineHeight={"1.5"}
+                >
+                  <Highlight
+                    query={["Code editor", "feedback", "portfolio", "projects"]}
+                    styles={{ px: "0.5", color: "var(--color-cyan)" }}
+                  >
+                    Reach out using the Code editor below for inquiries (type your message below),
+                    or share your valuable feedback about my portfolio and projects.
+                  </Highlight>
+                </Heading>
+                <AceEditor
+                  value={fileContents[selectedTab!] || ""}
+                  mode="javascript"
+                  theme="monokai"
+                  width="100%"
+                  height="200px"
+                  onChange={handleEditorChange}
+                  name="CodeEditor"
+                />
+                <Heading size={"xl"} my={4}>Example</Heading>
+                <DataListRoot orientation="horizontal">
+                  {stats.map((item) => (
+                    <DataListItem key={item.label} maxW="xs" label={
+                      <Box color="var(--color-gray)" fontSize={"lg"} fontWeight="bold">
+                        {item.label}
+                      </Box>
+                    } value={item.value} />
+                  ))}
+                </DataListRoot>
+              </Box>
 
 
             )}

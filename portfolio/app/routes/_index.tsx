@@ -65,13 +65,13 @@ export default function Index() {
               bg: "var(--bg-lightblack)",
             }
           }><BsReverseLayoutSidebarReverse /></Button>
-        <Button variant="ghost" me={2} _hover={
+        <Button variant="ghost" me={2} color="gray.400" _hover={
   {
     bg: "var(--bg-lightblack)",
     color: "#fff",
   }
 }>
-<Icon size={"sm"} color="gray.400" _hover={
+<Icon size={"xs"} _hover={
   {
     color: "#fff",
   }
@@ -79,13 +79,13 @@ export default function Index() {
 <FaMinus />
         </Icon>
         </Button>
-        <Button variant="ghost" me={2} _hover={
+        <Button variant="ghost" me={2} color="gray.400" _hover={
   {
     bg: "var(--bg-lightblack)",
     color: "#fff",
   }
 }>
-<Icon size={"sm"} color="gray.400" _hover={
+<Icon size={"sm"}  _hover={
   {
     color: "#fff",
   }
@@ -93,13 +93,13 @@ export default function Index() {
 <Copy />
         </Icon>
         </Button>
-        <Button variant="ghost" me={2} _hover={
+        <Button variant="ghost" me={2} color="gray.400" _hover={
   {
     bg: "var(--color-red)",
     color: "#fff",
   }
 }>
-<Icon size={"md"} color="gray.400" _hover={
+<Icon size={"md"} _hover={
   {
     color: "#fff",
   }

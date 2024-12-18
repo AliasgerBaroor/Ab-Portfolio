@@ -136,7 +136,7 @@ const FolderTree = () => {
 
       if (item.type === "folder") {
         return (
-          <Box key={item.name} pl={path.length * 4}>
+          <Box key={item.name + index} pl={path.length * 4}>
             <Flex alignItems="center" gap={2} onClick={() => toggleFolder(currentPath)} cursor="pointer">
               <Icon>{item.isOpen ? <TbChevronDown /> : <TbChevronRight />}</Icon>
               <Icon>{item.isOpen ? <FaFolderOpen color={item.color} /> : <IconComponent color={item.color} />
