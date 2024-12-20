@@ -106,3 +106,10 @@ body {
 }
 
 /* animations */
+
+
+/* utility */
+
+::-webkit-scrollbar {
+    display: none !important;
+}

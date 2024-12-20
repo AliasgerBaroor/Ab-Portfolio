@@ -1,6 +1,6 @@
 import { Box, Flex, Icon, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { FaFolderOpen, FaGitAlt, FaNpm, FaMarkdown } from "react-icons/fa";
+import { FaFolderOpen, FaGitAlt, FaNpm, FaMarkdown, FaStar } from "react-icons/fa";
 import { TbChevronRight, TbChevronDown } from "react-icons/tb";
 import { GrReactjs } from "react-icons/gr";
 import { RiFolderKeyholeFill, RiFolderHistoryFill, RiFolderUserFill,RiFolderChart2Fill, RiFolderAddFill } from "react-icons/ri";
@@ -25,6 +25,7 @@ const iconMapping: { [key: string]: IconType } = {
   "FaGitAlt": FaGitAlt,
   "VscJson": VscJson,
   "FaNpm": FaNpm,
+  "FaStar": FaStar,
   "FaMarkdown": FaMarkdown,
   "DiJavascript1": DiJavascript1,
   "SiVite": SiVite,
@@ -61,8 +62,8 @@ const data: TreeItem[] = [
         type: "folder",
         icon: "RiFolderChart2Fill",
         color: "var(--color-yellow)",
-        isOpen: false,
-        children: [{ name: "File2.txt", type: "file", icon: "GrReactjs", color: "var(--color-blue)" }],
+        isOpen: true,
+        children: [{ name: "About.txt", type: "file", icon: "FaStar", color: "var(--color-yellow)" }],
       },
       {
         name: "routes",
@@ -107,7 +108,22 @@ const data: TreeItem[] = [
   { name: "vite.config.ts", type: "file", icon: "SiVite", color: "var(--color-purple)" },
 ];
 
-const FolderTree = () => {
+type Item = {
+  id: string;
+  title: string;
+  icon: keyof typeof iconMapping;
+  content: React.ReactNode;
+}
+
+type FolderTreeProps = {
+  tabs: Item[]; 
+  setSelectedTab: React.Dispatch<React.SetStateAction<string | null>>; 
+  uuid: () => string; 
+  setTabs: React.Dispatch<React.SetStateAction<Item[]>>;
+};
+
+
+const FolderTree: React.FC<FolderTreeProps> = ({ tabs, setSelectedTab, uuid, setTabs }) => {
   const [FData, setFData] = useState<TreeItem[]>(data);
 
   const toggleFolder = (path: number[]) => {
@@ -128,7 +144,27 @@ const FolderTree = () => {
     updateState(updatedData, path);
     setFData(updatedData);
   };
-
+  const addOrSelectTab = (itemName: string) => {
+    const existingTab = tabs.find((tab) => tab.title === itemName);
+  
+    if (existingTab) {
+      setSelectedTab(existingTab.id);
+    } else {
+      const uid = uuid();
+  
+      const newTab = {
+        id: uid,
+        title: itemName,
+        color: "var(--color-yellow)",
+        content: `Content of ${itemName}`,
+        icon: "FaStar", 
+      };
+  
+      const newTabs = [...tabs, newTab];
+      setTabs(newTabs);
+      setSelectedTab(uid);
+    }
+  };
   const renderTree = (items: TreeItem[], path: number[] = []): JSX.Element[] => {
     return items.map((item, index) => {
       const currentPath = [...path, index];
@@ -151,7 +187,7 @@ const FolderTree = () => {
       }
 
       return (
-        <Box key={item.name} pl={(path.length + 1) * 4}>
+        <Box key={item.name} pl={(path.length + 1) * 4} onClick={() => addOrSelectTab("About.txt")}>
           <Flex alignItems="center" gap={2}  cursor="pointer">
             <Icon ms={2}>
             <IconComponent color={item.color} />

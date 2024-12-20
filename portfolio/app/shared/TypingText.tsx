@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Text } from "@chakra-ui/react";
 
 const TypingEffect = () => {
-  const texts = ["Frontend Developer", "Backend Developer", "AWS DevOps", "DevOps"];
+  const texts = ["Frontend Developer", "Backend Developer", "System Designer", "AWS DevOps", "DevOps"];
 
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);

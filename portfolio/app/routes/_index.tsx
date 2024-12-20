@@ -11,6 +11,13 @@ import { TbLayoutBottombar } from "react-icons/tb";
 import { LuLayoutPanelLeft } from "react-icons/lu";
 import FolderTree from "~/shared/FolderTree";
 import IconTab from "~/shared/tabs/IconTab";
+
+
+import { CiText } from "react-icons/ci";
+import { GiPartyPopper } from "react-icons/gi";
+import { FaStar, FaPhoneAlt } from "react-icons/fa";
+import { IconType } from "react-icons";
+import { useState } from "react";
 export const meta: MetaFunction = () => {
   return [
     { title: "SB Creations" },
@@ -28,8 +35,50 @@ const topHeader = [
   { id : "7", title: "Terminal" },
   { id : "8", title: "Help" },
 ]
+const uuid = () => {
+  return Math.random().toString(36).substring(2, 15)
+}
+
+type Item = {
+  id: string;
+  title: string;
+  icon: keyof typeof iconMapping;
+  content: React.ReactNode;
+}
+
+const iconMapping: { [key: string]: IconType } = {
+  GiPartyPopper: GiPartyPopper,
+  FaStar: FaStar,
+  CiText: CiText,
+  FaPhoneAlt: FaPhoneAlt,
+};
+
+const items: Item[] = [
+  { id: "eqci6nuohtu", title: "About.txt", content: "Tab Content", icon: "FaStar" },
+  { id: "bu9icnuqhtl", title: "Welcome.txt", content: "For simpler version of portfolio visit:", icon: "GiPartyPopper" },
+]
 
 export default function Index() {
+    const [tabs, setTabs] = useState<Item[]>(items)
+    const [selectedTab, setSelectedTab] = useState<string | null>(items[0].id)
+
+
+const addTab = () => {
+  const newTabs = [...tabs]
+
+  const uid = uuid()
+
+  newTabs.push({
+    id: uid,
+    title: `Contact.txt`,
+    content: `Contact Me`,
+    icon: "FaPhoneAlt",
+  })
+
+  setTabs(newTabs)
+  setSelectedTab(newTabs[newTabs.length - 1].id)
+}
+
   return (
     <Box py={4} pr={4} h={"94%"}>
       <Flex alignItems={"center"} pb={4} pl={4} justifyContent={"space-between"}>
@@ -114,10 +163,10 @@ export default function Index() {
         <IconTab />
       </Box>
       <Box flexBasis="25%" bg="var(--bg-filetree)" h={"100%"}>
-        <FolderTree />
+        <FolderTree tabs={tabs} setSelectedTab={setSelectedTab} uuid={uuid} setTabs={setTabs} />
       </Box>
       <Box flexBasis="70%" bg="var(--bg-editor)" h={"100%"}>
-        <HeaderTabs />
+        <HeaderTabs addTab={addTab} setTabs={setTabs} setSelectedTab={setSelectedTab} selectedTab={selectedTab} tabs={tabs} />
       </Box>
     </Flex>
     </Box>
