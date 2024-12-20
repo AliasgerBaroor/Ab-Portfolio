@@ -1,8 +1,8 @@
-import BackgroundAnimation from '~/shared/animation/BackgroundAnimation2'
+import BackgroundAnimation2 from '~/shared/animation/BackgroundAnimation2'
 
 const A = () => {
   return (
-    <BackgroundAnimation />
+    <BackgroundAnimation2 />
   )
 }
 

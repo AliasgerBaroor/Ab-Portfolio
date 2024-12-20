@@ -109,7 +109,24 @@ body {
 
 
 /* utility */
-
+/* 
 ::-webkit-scrollbar {
     display: none !important;
-}
+} */
+
+/* The scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background: green; /* Thumb color */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  /* The scrollbar thumb on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Thumb color when hovered */
+  }
+  
+  /* For Firefox (scrollbar-color and scrollbar-width) */
+  * {
+    scrollbar-color: var(--color-gray) var(--color-white); /* Thumb color and track color */
+    scrollbar-width: thin; /* Scrollbar thickness */
+  }

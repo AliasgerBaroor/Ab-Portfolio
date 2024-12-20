@@ -82,7 +82,11 @@ const data: TreeItem[] = [
         icon: "RiFolderHistoryFill",
         color: "var(--color-purple)",
         isOpen: false,
-        children: [{ name: "File2.txt", type: "file", icon: "GrReactjs", color: "var(--color-blue)" }],
+        children: [
+          { name: "VsCodePortfolio.txt", type: "file", icon: "GrReactjs", color: "var(--color-blue)" },
+          { name: "CMS.txt", type: "file", icon: "GrReactjs", color: "var(--color-blue)" },
+          { name: "ReverseProxy.txt", type: "file", icon: "GrReactjs", color: "var(--color-blue)" },
+        ],
       },
     ],
   },
