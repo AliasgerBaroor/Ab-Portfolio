@@ -6,11 +6,13 @@ import { LiaUserCircle } from "react-icons/lia";
 import { IconType } from "react-icons";
 import { PiSuitcaseSimpleFill } from "react-icons/pi";
 import { BsBook } from "react-icons/bs";
+import { RiContactsBook3Line } from "react-icons/ri";
 const GlowingIcon = ({ Color, Icon } : { Color: string, Icon: string }) => {
 const iconMapping: { [key: string]: IconType } = {
     "LiaUserCircle": LiaUserCircle,
     "PiSuitcaseSimpleFill": PiSuitcaseSimpleFill,
     "BsBook": BsBook,
+    "RiContactsBook3Line": RiContactsBook3Line,
   }
 
     const IconComponent = iconMapping[Icon];
@@ -27,13 +29,14 @@ const iconMapping: { [key: string]: IconType } = {
     }
   `;
 
+  const smSizeIcons = ["RiContactsBook3Line", "BsBook"]
   return (
     <Box
       as="span"
       display="inline-block"
       boxSize="8"
       color={`var(--color-${Color})`}
-      p={Icon === "BsBook" ? 1.5 : 1}
+      p={smSizeIcons.includes(Icon) ? 1.5 : 1}
       css={{
         animation: `${glow} 2s infinite`,
         borderRadius: "50%",

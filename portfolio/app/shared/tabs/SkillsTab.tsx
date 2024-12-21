@@ -1,6 +1,5 @@
 import { Badge, Box, Flex, Heading, HStack, Icon } from "@chakra-ui/react"
 import TopicHeader from "../headers/TopicHeader"
-import GlowingDivider from "../animation/glow/Devider"
 import TopicMainHeading from "../headers/TopicMainHeading"
 import { RiJavascriptFill, RiNodejsFill } from "react-icons/ri"
 import { GrReactjs } from "react-icons/gr";
@@ -38,10 +37,9 @@ const iconMapping: { [key: string]: IconType } = {
 const SkillsTab = () => {
 
     return (
-        <Box>
-            <GlowingDivider />
+        <Box width={"100%"}>
             <TopicHeader Color="yellow" Icon={"BsBook"} HText={"My Skillset"} />
-            <TopicMainHeading TopicText={"Full Stack software developer with experience in Front-End and Back-End technologies"} TopicHighlight={["Full Stack", "Front-End", "Back-End"]} />
+            <TopicMainHeading TopicText={"Full Stack software developer with experience in Front-End and Back-End technologies"} TopicHighlight={["Full Stack", "Front-End", "Back-End"]} color={"var(--color-yellow)"} />
             <HStack justifyContent={"space-between"} mt={8}>
                 <Box>Services name</Box>
                 <Box>
