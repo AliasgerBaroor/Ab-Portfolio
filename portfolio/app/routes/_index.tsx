@@ -57,6 +57,7 @@ const iconMapping: { [key: string]: IconType } = {
 };
 
 const items: Item[] = [
+  { id: "wwrwqhrhfgfhffyfM6tyXa721mexbJVV72EF0sC7dmA5rsSR2f", title: "ReverseProxy.sbc", content: "For simpler version of portfolio visit:", icon: "GiPartyPopper" },
   { id: "ao5lWpogZlcdFZyfM6tyXa721mexbJVV72EF0sC7dmA5rsSR2f", title: "Welcome.txt", content: "For simpler version of portfolio visit:", icon: "GiPartyPopper" },
   { id: "3rYhANgp84gLGaXdgVEsTw6sBpWOkixQgB6Tc0t0ijGOsC4Ykk", title: "About.txt", content: "Tab Content", icon: "FaStar" },
 ]
@@ -162,7 +163,7 @@ export default function Index() {
 
 
   return (
-    <Box py={4} pr={4} h={"94%"}>
+    <Box py={4} pr={4}  h={"94%"}>
       <Flex alignItems={"center"} pb={4} pl={4} justifyContent={"space-between"}>
         <Flex alignItems={"center"}>
           <Icon size={"xl"} me={2}>

@@ -1,5 +1,5 @@
 import { Heading, Tabs, Link, Box, Flex, Text, Image } from "@chakra-ui/react"
-import { GiPartyPopper } from "react-icons/gi";
+import { GiConsoleController, GiPartyPopper } from "react-icons/gi";
 import { FaStar } from "react-icons/fa";
 import { CiText } from "react-icons/ci";
 import { LuPlus } from "react-icons/lu";
@@ -21,6 +21,10 @@ import ScrollChevrons from "../ScrollChevrons";
 import ContactTab from "./ContactTab";
 import { BsBook } from "react-icons/bs";
 import { RiContactsBook3Line } from "react-icons/ri";
+import ReverseProxy from "../works/ReverseProxy";
+import { SiTask } from "react-icons/si";
+import ImagesFullPage from "../ImagesFullPage";
+import { IoMdImage } from "react-icons/io";
 
 type Item = {
   id: string;
@@ -35,6 +39,8 @@ const iconMapping: { [key: string]: IconType } = {
   CiText: CiText,
   RiContactsBook3Line: RiContactsBook3Line,
   BsBook: BsBook,
+  SiTask: SiTask,
+  IoMdImage: IoMdImage,
 };
 
 type HeaderTabsProps = {
@@ -116,138 +122,153 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ addTab, setTabs, setSelectedTab
         </Button>
       </Tabs.List>
       <Tabs.ContentGroup>
-        {tabs.map((item: Item) => (
-          <Tabs.Content value={item.id} key={item.id} display={"flex"} justifyContent={"center"} px={16} pt={8}>
-            {item.title === "Welcome.txt" ? (
-              <Box textAlign={"center"}>
-                <Heading size="lg" letterSpacing="tight" color={"var(--color-cyan)"}>Welcome Friend!</Heading>
-                <Heading size="2xl" letterSpacing="tight">
-                  {item.content}
-                  <Link
-                    variant="underline"
-                    href="https://chakra-ui.com"
-                    style={{ color: 'var(--color-blue)' }}
-                    ms={4}
-                  >
-                    Basic Version
-                  </Link>
-                </Heading>
-                <EditorEmptyState />
-              </Box>
-            ) : item.title === "About.txt" ? (
-              <Box w={"100%"}>
-                <Box pb={20}>
-                  <Heading size="7xl" position={"relative"} zIndex={2}>Aliasger Bohra 👋</Heading>
-                  <Heading size="2xl" display={"flex"} position={"relative"} zIndex={2} >Looking for work <Flex ml={2}>
-                    <Status size={"lg"} value="warning" me={2} position={"relative"} zIndex={2} /> /
-                    <TypingEffect />
-                  </Flex></Heading>
-                  <CTAButtons addTab={addTab} />
-                  <ScrollChevrons />
-
+        {tabs.map((item: Item) => {
+          const regex = /^work-full-\d+.*\.png$/;
+          const isWelcome = item.title === "Welcome.txt";
+          const isAbout = item.title === "About.txt";
+          const isSkillset = item.title === "Skillset.txt";
+          const isSBC = item.title.split(".").pop() === "sbc";
+          return (
+            <Tabs.Content value={item.id} key={item.id} display={"flex"} justifyContent={"center"} pt={8}>
+              { isWelcome ? (
+                <Box textAlign={"center"}>
+                  <Heading size="lg" letterSpacing="tight" color={"var(--color-cyan)"}>Welcome Friend!</Heading>
+                  <Heading size="2xl" letterSpacing="tight">
+                    {item.content}
+                    <Link
+                      variant="underline"
+                      href="https://chakra-ui.com"
+                      style={{ color: 'var(--color-blue)' }}
+                      ms={4}
+                    >
+                      Basic Version
+                    </Link>
+                  </Heading>
+                  <EditorEmptyState />
                 </Box>
-                <GlowingDivider />
+              ) : isAbout ? (
+                <Box w={"100%"} px={16}>
+                  <Box pb={20}>
+                    <Heading size="7xl" position={"relative"} zIndex={2}>Aliasger Bohra 👋</Heading>
+                    <Heading size="2xl" display={"flex"} position={"relative"} zIndex={2} >Looking for work <Flex ml={2}>
+                      <Status size={"lg"} value="warning" me={2} position={"relative"} zIndex={2} /> /
+                      <TypingEffect />
+                    </Flex></Heading>
+                    <CTAButtons addTab={addTab} />
+                    <ScrollChevrons />
 
-                {/* About me */}
-                <Box>
-                  <TopicHeader Color="green" Icon={"LiaUserCircle"} HText={"About Me"} />
-
-                  <TopicMainHeading TopicText={"I'm a software developer specialized on Web Applications"} TopicHighlight={["software", "developer", "Web", "Applications"]} color={"var(--color-green)"} />
-
-                  <Flex alignItems={"center"} my={16} justifyContent={"space-between"}>
-                    <Box>
-                      <Text fontSize={24}>Aliasger Bohra (SB Creations)</Text>
-                      <Text fontSize={16} color={"var(--color-green)"}>Full Stack Web Developer</Text>
-
-                      <Text mt={4} maxWidth={"600px"} color={"gray.400"}>
-                        I'm an experienced software engineer who constantly seeks out innovative solutions to everyday problems.
-                      </Text>
-                      <Text maxWidth={"600px"} mt={4} color={"gray.400"}>
-                        After 4 years in this industry I have worked with multiple front-end and back-end technologies.
-                      </Text>
-                    </Box>
-                    <Image
-                      src={logo}
-                      boxSize="150px"
-                      borderRadius="full"
-                      fit="cover"
-                      alt="Aliasger Bohra"
-                    />
-                  </Flex>
-
-                  <Text fontSize={16} color={"var(--color-green)"}>Languages</Text>
-                  <Flex style={{
-                    borderTop: "1px solid var(--color-gray)",
-                    borderBottom: "1px solid var(--color-gray)",
-                  }} py={4} px={2} maxWidth={"365px"} gap={16} my={4}>
-                    <Flex gap={2}>
-                      <Text>Hindi</Text>
-                      <Text>-</Text>
-                      <Text color={"gray.400"}>Native</Text>
-                    </Flex>
-                    <Flex gap={2}>
-                      <Text>English</Text>
-                      <Text>-</Text>
-                      <Text color={"gray.400"}>Intermediate</Text>
-                    </Flex>
-                  </Flex>
-                  <CTAButtons addTab={addTab} />
-
-                </Box>
-                {/* Skills */}
-                <GlowingDivider />
-                <SkillsTab />
-                {/* Works */}
-                <GlowingDivider />
-
-                <WorkTab />
-
-                {/* Contact */}
-                <GlowingDivider />
-
-                <ContactTab selectedTab={selectedTab} />
-                {/* <Box
-                  textAlign={"start"}
-                  p={4}
-                >
+                  </Box>
                   <GlowingDivider />
 
-                  <TopicHeader Color="blue" Icon={"RiContactsBook3Line"} HText={"Contact Me"} />
+                  {/* About me */}
+                  <Box>
+                    <TopicHeader Color="green" Icon={"LiaUserCircle"} HText={"About Me"} />
 
-                  <TopicMainHeading TopicText={"Use the code editor below to ask questions or share feedback about my portfolio"} TopicHighlight={["code editor", "questions", "feedback", "portfolio", "projects"]} color={"var(--color-blue)"} />
+                    <TopicMainHeading TopicText={"I'm a software developer specialized on Web Applications"} TopicHighlight={["software", "developer", "Web", "Applications"]} color={"var(--color-green)"} />
 
-                  <Box my={8}></Box>
+                    <Flex alignItems={"center"} my={16} justifyContent={"space-between"}>
+                      <Box>
+                        <Text fontSize={24}>Aliasger Bohra (SB Creations)</Text>
+                        <Text fontSize={16} color={"var(--color-green)"}>Full Stack Web Developer</Text>
 
-                  <AceEditor
-                    value={fileContents[selectedTab!] || ""}
-                    mode="javascript"
-                    theme="monokai"
-                    width="100%"
-                    height="200px"
-                    onChange={handleEditorChange}
-                    name="CodeEditor"
-                  />
-                  
-                  <Heading size={"xl"} my={4}>Example</Heading>
-                  <DataListRoot orientation="horizontal">
-                    {stats.map((item) => (
-                      <DataListItem key={item.label} maxW="xs" label={
-                        <Box color="var(--color-gray)" fontSize={"lg"} fontWeight="bold">
-                          {item.label}
-                        </Box>
-                      } value={item.value} />
-                    ))}
-                  </DataListRoot>
-                </Box> */}
+                        <Text mt={4} maxWidth={"600px"} color={"gray.400"}>
+                          I'm an experienced software engineer who constantly seeks out innovative solutions to everyday problems.
+                        </Text>
+                        <Text maxWidth={"600px"} mt={4} color={"gray.400"}>
+                          After 4 years in this industry I have worked with multiple front-end and back-end technologies.
+                        </Text>
+                      </Box>
+                      <Image
+                        src={logo}
+                        boxSize="150px"
+                        borderRadius="full"
+                        fit="cover"
+                        alt="Aliasger Bohra"
+                      />
+                    </Flex>
 
-              </Box>
-            ) : item.title === "Skillset.txt" ? (
-              <SkillsTab />
-            ) : (
-              <ContactTab selectedTab={selectedTab} />
-            )}
-          </Tabs.Content>
-        ))}
+                    <Text fontSize={16} color={"var(--color-green)"}>Languages</Text>
+                    <Flex style={{
+                      borderTop: "1px solid var(--color-gray)",
+                      borderBottom: "1px solid var(--color-gray)",
+                    }} py={4} px={2} maxWidth={"365px"} gap={16} my={4}>
+                      <Flex gap={2}>
+                        <Text>Hindi</Text>
+                        <Text>-</Text>
+                        <Text color={"gray.400"}>Native</Text>
+                      </Flex>
+                      <Flex gap={2}>
+                        <Text>English</Text>
+                        <Text>-</Text>
+                        <Text color={"gray.400"}>Intermediate</Text>
+                      </Flex>
+                    </Flex>
+                    <CTAButtons addTab={addTab} />
+
+                  </Box>
+
+                  {/* Skills */}
+                  <GlowingDivider />
+                  <SkillsTab />
+
+                  {/* Works */}
+                  <GlowingDivider />
+
+                  <WorkTab />
+
+                  {/* Contact */}
+                  <GlowingDivider />
+
+                  <ContactTab />
+                  {/* <Box
+                    textAlign={"start"}
+                    p={4}
+                  >
+                    <GlowingDivider />
+  
+                    <TopicHeader Color="blue" Icon={"RiContactsBook3Line"} HText={"Contact Me"} />
+  
+                    <TopicMainHeading TopicText={"Use the code editor below to ask questions or share feedback about my portfolio"} TopicHighlight={["code editor", "questions", "feedback", "portfolio", "projects"]} color={"var(--color-blue)"} />
+  
+                    <Box my={8}></Box>
+  
+                    <AceEditor
+                      value={fileContents[selectedTab!] || ""}
+                      mode="javascript"
+                      theme="monokai"
+                      width="100%"
+                      height="200px"
+                      onChange={handleEditorChange}
+                      name="CodeEditor"
+                    />
+                    
+                    <Heading size={"xl"} my={4}>Example</Heading>
+                    <DataListRoot orientation="horizontal">
+                      {stats.map((item) => (
+                        <DataListItem key={item.label} maxW="xs" label={
+                          <Box color="var(--color-gray)" fontSize={"lg"} fontWeight="bold">
+                            {item.label}
+                          </Box>
+                        } value={item.value} />
+                      ))}
+                    </DataListRoot>
+                  </Box> */}
+
+                </Box>
+              ) : isSkillset ? (
+                <SkillsTab />
+              ) : item.title === "ReverseProxy.sbc" ? (
+                <ReverseProxy />
+              ) : regex.test(item.title) ? (
+                <ImagesFullPage ImagePath={item.title} />
+              ) : isSBC ? (
+                <ImagesFullPage ImagePath={item.title} />
+              ) : (
+                <ContactTab />
+              )}
+            </Tabs.Content>
+          )
+        })}
       </Tabs.ContentGroup>
     </Tabs.Root>
   )

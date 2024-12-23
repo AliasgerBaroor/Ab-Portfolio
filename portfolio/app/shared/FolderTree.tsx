@@ -3,15 +3,15 @@ import { useState } from "react";
 import { FaFolderOpen, FaGitAlt, FaNpm, FaMarkdown, FaStar } from "react-icons/fa";
 import { TbChevronRight, TbChevronDown } from "react-icons/tb";
 import { GrReactjs } from "react-icons/gr";
-import { RiFolderKeyholeFill, RiFolderHistoryFill, RiFolderUserFill,RiFolderChart2Fill, RiFolderAddFill, RiContactsBook3Line } from "react-icons/ri";
+import { RiFolderKeyholeFill, RiFolderHistoryFill, RiFolderUserFill, RiFolderChart2Fill, RiFolderAddFill, RiContactsBook3Line, RiFolderImageFill } from "react-icons/ri";
 import { LiaStarHalfAltSolid } from "react-icons/lia";
 import { IoMdImage } from "react-icons/io";
-import { SiEslint,SiVite } from "react-icons/si";
+import { SiEslint, SiVite, SiTask } from "react-icons/si";
 import { VscJson } from "react-icons/vsc";
 import { DiJavascript1 } from "react-icons/di";
+import { BsBook } from "react-icons/bs";
 
 import { IconType } from "react-icons";
-import { BsBook } from "react-icons/bs";
 
 const iconMapping: { [key: string]: IconType } = {
   "RiFolderKeyholeFill": RiFolderKeyholeFill,
@@ -20,6 +20,7 @@ const iconMapping: { [key: string]: IconType } = {
   "RiFolderHistoryFill": RiFolderHistoryFill,
   "RiFolderChart2Fill": RiFolderChart2Fill,
   "RiFolderAddFill": RiFolderAddFill,
+  "RiFolderImageFill": RiFolderImageFill,
   "LiaStarHalfAltSolid": LiaStarHalfAltSolid,
   "IoMdImage": IoMdImage,
   "SiEslint": SiEslint,
@@ -32,6 +33,7 @@ const iconMapping: { [key: string]: IconType } = {
   "SiVite": SiVite,
   "BsBook": BsBook,
   "RiContactsBook3Line": RiContactsBook3Line,
+  "SiTask": SiTask,
 }
 
 type FileItem = {
@@ -47,7 +49,7 @@ type FolderItem = {
   color: string;
   type: "folder";
   isOpen: boolean;
-  children?: TreeItem[]; 
+  children?: TreeItem[];
 };
 
 type TreeItem = FileItem | FolderItem;
@@ -96,9 +98,9 @@ const data: TreeItem[] = [
         color: "var(--color-purple)",
         isOpen: true,
         children: [
-          { name: "VsCodePortfolio.tsx", type: "file", icon: "GrReactjs", color: "var(--color-blue)" },
-          { name: "CMS.tsx", type: "file", icon: "GrReactjs", color: "var(--color-blue)" },
-          { name: "ReverseProxy.tsx", type: "file", icon: "GrReactjs", color: "var(--color-blue)" },
+          { name: "VsCodePortfolio.sbc", type: "file", icon: "SiTask", color: "var(--color-lightblue)" },
+          { name: "CMS.sbc", type: "file", icon: "SiTask", color: "var(--color-lightblue)" },
+          { name: "ReverseProxy.sbc", type: "file", icon: "SiTask", color: "var(--color-lightblue)" },
         ],
       },
     ],
@@ -113,6 +115,20 @@ const data: TreeItem[] = [
       { name: "favicon.ico", type: "file", icon: "LiaStarHalfAltSolid", color: "var(--color-orange)" },
       { name: "logo-dark.png", type: "file", icon: "IoMdImage", color: "var(--color-pink)" },
       { name: "logo-light.png", type: "file", icon: "IoMdImage", color: "var(--color-pink)" },
+      {
+        name: "assets",
+        type: "folder",
+        icon: "RiFolderImageFill",
+        color: "var(--color-blue)",
+        isOpen: false,
+        children: [
+          { name: "work-full-1.png", type: "file", icon: "IoMdImage", color: "var(--color-green)" },
+          { name: "work-full-2.png", type: "file", icon: "IoMdImage", color: "var(--color-green)" },
+          { name: "work-full-2-in1.png", type: "file", icon: "IoMdImage", color: "var(--color-green)" },
+          { name: "work-full-3.png", type: "file", icon: "IoMdImage", color: "var(--color-green)" },
+
+        ],
+      },
     ],
   },
   { name: ".eslintrc.cjs", type: "file", icon: "SiEslint", color: "var(--color-blue)" },
@@ -133,12 +149,11 @@ type Item = {
 }
 
 type FolderTreeProps = {
-  tabs: Item[]; 
-  setSelectedTab: React.Dispatch<React.SetStateAction<string | null>>; 
-  uuid: () => string; 
+  tabs: Item[];
+  setSelectedTab: React.Dispatch<React.SetStateAction<string | null>>;
+  uuid: () => string;
   setTabs: React.Dispatch<React.SetStateAction<Item[]>>;
 };
-
 
 const FolderTree: React.FC<FolderTreeProps> = ({ tabs, setSelectedTab, uuid, setTabs }) => {
   const [FData, setFData] = useState<TreeItem[]>(data);
@@ -163,20 +178,20 @@ const FolderTree: React.FC<FolderTreeProps> = ({ tabs, setSelectedTab, uuid, set
   };
   const addOrSelectTab = (itemName: string, icon: keyof typeof iconMapping, color: string) => {
     const existingTab = tabs.find((tab) => tab.title === itemName);
-  
+
     if (existingTab) {
       setSelectedTab(existingTab.id);
     } else {
       const uid = uuid();
-  
+
       const newTab = {
         id: uid,
         title: itemName,
         color: color,
         content: `Content of ${itemName}`,
-        icon: icon, 
+        icon: icon,
       };
-  
+
       const newTabs = [...tabs, newTab];
       setTabs(newTabs);
       setSelectedTab(uid);
@@ -186,14 +201,16 @@ const FolderTree: React.FC<FolderTreeProps> = ({ tabs, setSelectedTab, uuid, set
     return items.map((item, index) => {
       const currentPath = [...path, index];
       const IconComponent = iconMapping[item.icon];
+      const regex = /^work-full-\d+.*\.png$/;
 
+      const isSBC = item.name.split(".").pop() === "sbc";
       if (item.type === "folder") {
         return (
           <Box key={item.name + index} pl={path.length * 4}>
             <Flex alignItems="center" gap={2} onClick={() => toggleFolder(currentPath)} cursor="pointer">
               <Icon>{item.isOpen ? <TbChevronDown /> : <TbChevronRight />}</Icon>
               <Icon>{item.isOpen ? <FaFolderOpen color={item.color} /> : <IconComponent color={item.color} />
-            }</Icon>
+              }</Icon>
               <Text>{item.name}</Text>
             </Flex>
             {item.isOpen && item.children && (
@@ -203,10 +220,10 @@ const FolderTree: React.FC<FolderTreeProps> = ({ tabs, setSelectedTab, uuid, set
         );
       }
       return (
-        <Box key={item.name} pl={(path.length + 1) * 4} onClick={() => item.name === "About.txt" ? addOrSelectTab("About.txt", item.icon, item.color) : item.name === "Skillset.txt" ? addOrSelectTab("Skillset.txt", item.icon, item.color) : item.name === "Contact.txt" ? addOrSelectTab("Contact.txt", item.icon, item.color) : "" }>
-          <Flex alignItems="center" gap={2}  cursor="pointer">
+        <Box key={item.name} pl={(path.length + 1) * 4} onClick={() => item.name === "About.txt" ? addOrSelectTab("About.txt", item.icon, item.color) : item.name === "Skillset.txt" ? addOrSelectTab("Skillset.txt", item.icon, item.color) : item.name === "Contact.txt" ? addOrSelectTab("Contact.txt", item.icon, item.color) : regex.test(item.name) ? addOrSelectTab(item.name, item.icon, item.color) : isSBC ? addOrSelectTab(item.name, item.icon, item.color) : ""}>
+          <Flex alignItems="center" gap={2} cursor="pointer">
             <Icon ms={2}>
-            <IconComponent color={item.color} />
+              <IconComponent color={item.color} />
             </Icon>
             <Text>{item.name}</Text>
           </Flex>
@@ -215,7 +232,7 @@ const FolderTree: React.FC<FolderTreeProps> = ({ tabs, setSelectedTab, uuid, set
     });
   };
 
-  return <Box>{renderTree(FData)}</Box>;
+  return <Box height={"100%"} overflowY={"auto"} maxHeight={"100vh"}>{renderTree(FData)}</Box>;
 };
 
 export default FolderTree;

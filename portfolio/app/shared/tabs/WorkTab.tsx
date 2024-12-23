@@ -1,12 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import TopicHeader from "../headers/TopicHeader";
-import GlowingDivider from "../animation/glow/Devider";
 import TopicMainHeading from "../headers/TopicMainHeading";
 import WorkCards from "../cards/WorkCards";
 const WorkTab = () => {
   return (
     <Box>
-      <GlowingDivider />
       <TopicHeader Color="pink" Icon={"PiSuitcaseSimpleFill"} HText={"About My Work"} />
       <TopicMainHeading TopicText={"Some of my work as a full stack web developer"} TopicHighlight={["my work", "web"]} color={"var(--color-pink)"} />
 
