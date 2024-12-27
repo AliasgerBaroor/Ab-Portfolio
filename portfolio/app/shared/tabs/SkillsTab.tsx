@@ -37,7 +37,7 @@ const iconMapping: { [key: string]: IconType } = {
 const SkillsTab = () => {
 
     return (
-        <Box width={"100%"} px={16}>
+        <Box width={"100%"}>
             <TopicHeader Color="yellow" Icon={"BsBook"} HText={"My Skillset"} />
             <TopicMainHeading TopicText={"Full Stack software developer with experience in Front-End and Back-End technologies"} TopicHighlight={["Full Stack", "Front-End", "Back-End"]} color={"var(--color-yellow)"} />
             <HStack justifyContent={"space-between"} mt={8}>

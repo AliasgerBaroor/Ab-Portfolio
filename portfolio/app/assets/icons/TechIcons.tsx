@@ -94,6 +94,21 @@ const GitHubIcon = () => {
       </Box>
     )
   }
+const TailwindIcon = () => {
+    return (
+      <Box>
+<svg stroke="currentColor" fill={"var(--color-cyan)"} stroke-width="0" viewBox="0 0 24 24" height="72" width="72" xmlns="http://www.w3.org/2000/svg"><path d="M11.9996 4.85999C8.82628 4.85999 6.84294 6.44665 6.04961 9.61999C7.23961 8.03332 8.62794 7.43832 10.2146 7.83499C11.12 8.06109 11.7666 8.71757 12.4835 9.44545C13.6507 10.6295 15.0004 12 17.9496 12C21.1229 12 23.1063 10.4133 23.8996 7.23998C22.7096 8.82665 21.3213 9.42165 19.7346 9.02499C18.8292 8.79889 18.1827 8.1424 17.4657 7.41452C16.2995 6.23047 14.9498 4.85999 11.9996 4.85999ZM6.04961 12C2.87628 12 0.892943 13.5867 0.0996094 16.76C1.28961 15.1733 2.67794 14.5783 4.26461 14.975C5.17 15.2011 5.81657 15.8576 6.53354 16.5855C7.70073 17.7695 9.05039 19.14 11.9996 19.14C15.1729 19.14 17.1563 17.5533 17.9496 14.38C16.7596 15.9667 15.3713 16.5617 13.7846 16.165C12.8792 15.9389 12.2326 15.2824 11.5157 14.5545C10.3495 13.3705 8.99982 12 6.04961 12Z"></path></svg>
+      </Box>
+    )
+  }
+const ChakraUiIcon = () => {
+    return (
+      <Box>
+<svg stroke="currentColor" fill={"var(--color-cyan)"} stroke-width="0" role="img" viewBox="0 0 24 24" height="72" width="72" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.352 0 0 5.352 0 12s5.352 12 12 12 12-5.352 12-12S18.648 0 12 0zm2.8 4.333c.13-.004.248.136.171.278l-3.044 5.58a.187.187 0 00.164.276h5.26c.17 0 .252.207.128.323l-9.22 8.605c-.165.154-.41-.063-.278-.246l4.364-6.021a.187.187 0 00-.151-.296H6.627a.187.187 0 01-.131-.32l8.18-8.123a.182.182 0 01.125-.056z"></path></svg>
+      </Box>
+    )
+  }
 
-  export { HtmlIcon, CssIcon, JavascriptIcon, ReactIcon, NodeIcon, ExpressIcon, MongoDBIcon, DockerIcon, RemixIcon, KindeIcon, GitIcon, GitHubIcon }
+  export { HtmlIcon, CssIcon, JavascriptIcon, ReactIcon, NodeIcon, ExpressIcon, MongoDBIcon, DockerIcon, RemixIcon, KindeIcon, GitIcon, GitHubIcon, TailwindIcon, ChakraUiIcon }
+
 export default TechIcons

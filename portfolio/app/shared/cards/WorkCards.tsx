@@ -1,6 +1,7 @@
 import { Box, Card, Highlight, Image, Link } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import work1 from "~/assets/images/work-1.png"
+import work2 from "~/assets/images/work-2.png"
 
   const glow = keyframes`
     0% {
@@ -25,7 +26,7 @@ const WorkCards = ({ cardText, cardQuery, cardLink, cardImage }: { cardText: str
     <Image
       objectFit="cover"
       maxW="200px"
-      src={cardImage === "work1" ? work1 : work1}
+      src={cardImage === "work1" ? work1 : cardImage === "work2" ? work2 : "other"}
       alt="Caffe Latte"
     />
     <Box background={"#1b2133"} w={"100%"}>

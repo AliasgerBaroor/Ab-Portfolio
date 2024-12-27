@@ -1,59 +1,51 @@
+import { Alert as ChakraAlert } from "@chakra-ui/react"
+import { CloseButton } from "./close-button"
 import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "~/lib/utils"
+export interface AlertProps extends Omit<ChakraAlert.RootProps, "title"> {
+  startElement?: React.ReactNode
+  endElement?: React.ReactNode
+  title?: React.ReactNode
+  icon?: React.ReactElement
+  closable?: boolean
+  onClose?: () => void
+}
 
-const alertVariants = cva(
-  "relative w-full rounded-lg border border-slate-200 px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-slate-950 [&>svg~*]:pl-7 dark:border-slate-800 dark:[&>svg]:text-slate-50",
-  {
-    variants: {
-      variant: {
-        default: "bg-white text-slate-950 dark:bg-slate-950 dark:text-slate-50",
-        destructive:
-          "border-red-500/50 text-red-500 dark:border-red-500 [&>svg]:text-red-500 dark:border-red-900/50 dark:text-red-900 dark:dark:border-red-900 dark:[&>svg]:text-red-900",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
+export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+  function Alert(props, ref) {
+    const {
+      title,
+      children,
+      icon,
+      closable,
+      onClose,
+      startElement,
+      endElement,
+      ...rest
+    } = props
+    return (
+      <ChakraAlert.Root ref={ref} {...rest}>
+        {startElement || <ChakraAlert.Indicator>{icon}</ChakraAlert.Indicator>}
+        {children ? (
+          <ChakraAlert.Content>
+            <ChakraAlert.Title>{title}</ChakraAlert.Title>
+            <ChakraAlert.Description>{children}</ChakraAlert.Description>
+          </ChakraAlert.Content>
+        ) : (
+          <ChakraAlert.Title flex="1">{title}</ChakraAlert.Title>
+        )}
+        {endElement}
+        {closable && (
+          <CloseButton
+            size="sm"
+            pos="relative"
+            top="-2"
+            insetEnd="-2"
+            alignSelf="flex-start"
+            onClick={onClose}
+          />
+        )}
+      </ChakraAlert.Root>
+    )
+  },
 )
-
-const Alert = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof alertVariants>
->(({ className, variant, ...props }, ref) => (
-  <div
-    ref={ref}
-    role="alert"
-    className={cn(alertVariants({ variant }), className)}
-    {...props}
-  />
-))
-Alert.displayName = "Alert"
-
-const AlertTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h5
-    ref={ref}
-    className={cn("mb-1 font-medium leading-none tracking-tight", className)}
-    {...props}
-  />
-))
-AlertTitle.displayName = "AlertTitle"
-
-const AlertDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("text-sm [&_p]:leading-relaxed", className)}
-    {...props}
-  />
-))
-AlertDescription.displayName = "AlertDescription"
-
-export { Alert, AlertTitle, AlertDescription }

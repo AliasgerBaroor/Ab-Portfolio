@@ -6,7 +6,6 @@ import GlowingDivider from "../animation/glow/Devider"
 import TopicMainHeading from "../headers/TopicMainHeading"
 import reverseProxySystemDesignImg from "~/assets/images/work-full-2-in1.png"
 import TechnologiesSection from "../section/TechnologiesSection"
-import AnimatedCardDescription from "../animation/ProjectCardAnimation"
 
 import { FaGitAlt, FaNpm, FaMarkdown, FaStar } from "react-icons/fa";
 import { GrReactjs } from "react-icons/gr";
@@ -19,6 +18,7 @@ import { DiJavascript1 } from "react-icons/di";
 import { BsBook } from "react-icons/bs";
 
 import { IconType } from "react-icons";
+import AnimatedCardDescription from "../animation/ProjectCardAnimationBasic"
 
 const tech_stack = [
   {
@@ -98,42 +98,8 @@ const iconMapping: { [key: string]: IconType } = {
   "SiTask": SiTask,
 }
 
-type Item = {
-  id: string;
-  title: string;
-  icon: keyof typeof iconMapping;
-  content: React.ReactNode;
-}
+const ReverseProxyBasic = ({ setProjectVisited }: { setProjectVisited : React.Dispatch<React.SetStateAction<string>>}) => {
 
-type ProjectProp = {
-  tabs: Item[];
-  setSelectedTab: React.Dispatch<React.SetStateAction<string | null>>;
-  uuid: () => string;
-  setTabs: React.Dispatch<React.SetStateAction<Item[]>>;
-};
-const ReverseProxy: React.FC<ProjectProp> = ({ tabs, setTabs, uuid, setSelectedTab }) => {
-
-  const addOrSelectTab = (itemName: string, icon: keyof typeof iconMapping, color: string) => {
-    const existingTab = tabs.find((tab) => tab.title === itemName);
-
-    if (existingTab) {
-      setSelectedTab(existingTab.id);
-    } else {
-      const uid = uuid();
-
-      const newTab = {
-        id: uid,
-        title: itemName,
-        color: color,
-        content: `Content of ${itemName}`,
-        icon: icon,
-      };
-
-      const newTabs = [...tabs, newTab];
-      setTabs(newTabs);
-      setSelectedTab(uid);
-    }
-  };
 
   return (
     <Box pt={16} width="100%">
@@ -281,7 +247,7 @@ const ReverseProxy: React.FC<ProjectProp> = ({ tabs, setTabs, uuid, setSelectedT
         November 2024
         </Text>
 
-        <AnimatedCardDescription addOrSelectTab={addOrSelectTab} projectName={"CMS.sbc"} />
+        <AnimatedCardDescription setProjectVisited={setProjectVisited} itemName={"CMS"} />
       </Card.Body>
       <Card.Footer justifyContent="flex-end">
       </Card.Footer>
@@ -298,7 +264,7 @@ const ReverseProxy: React.FC<ProjectProp> = ({ tabs, setTabs, uuid, setSelectedT
         December 2024
         </Text>
 
-        <AnimatedCardDescription addOrSelectTab={addOrSelectTab} projectName={"VsCodePortfolio.sbc"} />
+        <AnimatedCardDescription setProjectVisited={setProjectVisited} itemName={"VsCodePortfolio"} />
       </Card.Body>
       <Card.Footer justifyContent="flex-end">
       </Card.Footer>
@@ -310,4 +276,4 @@ const ReverseProxy: React.FC<ProjectProp> = ({ tabs, setTabs, uuid, setSelectedT
   )
 }
 
-export default ReverseProxy
+export default ReverseProxyBasic

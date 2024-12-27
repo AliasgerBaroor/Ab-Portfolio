@@ -12,7 +12,7 @@ const WorkTab = () => {
       
       <WorkCards cardText={"CMS-Forge, A CMS designed to build custom CMS platforms with pre-rendered components and preset algorithms, streamlining development for dynamic content management."} cardQuery={["CMS-Forge", "pre-rendered", "algorithms"]} cardLink={["https://chakra-ui.com", "Learn More"]} cardImage={"work1"} />
  
-      <WorkCards cardText={"ReverseProxy-Manager, An app to create custom reverse proxies with named configurations, Docker image selection, and automatic domain generation like http://reverse.proxy/usergivenname.localhost."} cardQuery={["ReverseProxy-Manager", "automatic domain", "http://reverse.proxy/usergivenname.localhost"]} cardLink={["https://chakra-ui.com", "Learn More"]} cardImage={"work1"} />
+      <WorkCards cardText={"ReverseProxy-Manager, An app to create custom reverse proxies with named configurations, Docker image selection, and automatic domain generation like http://reverse.proxy/usergivenname.localhost."} cardQuery={["ReverseProxy-Manager", "automatic domain", "http://reverse.proxy/usergivenname.localhost"]} cardLink={["https://chakra-ui.com", "Learn More"]} cardImage={"work2"} />
 
     </Box>
   );

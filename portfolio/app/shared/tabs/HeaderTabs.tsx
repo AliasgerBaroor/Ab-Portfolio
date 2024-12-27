@@ -1,12 +1,11 @@
-import { Heading, Tabs, Link, Box, Flex, Text, Image } from "@chakra-ui/react"
-import { GiConsoleController, GiPartyPopper } from "react-icons/gi";
+import { Heading, Tabs, Box, Flex, Text, Image } from "@chakra-ui/react"
+import {  GiPartyPopper } from "react-icons/gi";
 import { FaStar } from "react-icons/fa";
 import { CiText } from "react-icons/ci";
 import { LuPlus } from "react-icons/lu";
 import { Button } from "~/components/ui/button";
 import { CloseButton } from "~/components/ui/close-button";
 import { IconType } from "react-icons";
-import EditorEmptyState from "../EditorEmptyState";
 import { Status } from "~/components/ui/status"
 import logo from "~/assets/images/logo.jpg"
 
@@ -25,6 +24,8 @@ import ReverseProxy from "../works/ReverseProxy";
 import { SiTask } from "react-icons/si";
 import ImagesFullPage from "../ImagesFullPage";
 import { IoMdImage } from "react-icons/io";
+import VSCodePortfolio from "../works/VSCodePortfolio";
+import WelcomeTab from "./WelcomeTab";
 
 type Item = {
   id: string;
@@ -43,15 +44,30 @@ const iconMapping: { [key: string]: IconType } = {
   IoMdImage: IoMdImage,
 };
 
+type ProjectProp = {
+  tabs: Item[];
+  setSelectedTab: React.Dispatch<React.SetStateAction<string | null>>;
+  uuid: () => string;
+  setTabs: React.Dispatch<React.SetStateAction<Item[]>>;
+};
+
+const ProjectMapping: { [key: string]: React.FC<ProjectProp> } = {
+  "ReverseProxy.sbc": ReverseProxy,
+  "VsCodePortfolio.sbc": VSCodePortfolio,
+  "CMS.sbc": ReverseProxy,
+};
+
 type HeaderTabsProps = {
   addTab: () => void;
   setTabs: React.Dispatch<React.SetStateAction<Item[]>>;
   setSelectedTab: React.Dispatch<React.SetStateAction<string | null>>;
   selectedTab: string | null;
   tabs: Item[];
+  uuid: () => string;
+  setSimpleFolio: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const HeaderTabs: React.FC<HeaderTabsProps> = ({ addTab, setTabs, setSelectedTab, selectedTab, tabs }) => {
+const HeaderTabs: React.FC<HeaderTabsProps> = ({ addTab, setTabs, setSelectedTab, selectedTab, tabs, uuid, setSimpleFolio }) => {
 
   const removeTab = (id: string) => {
     if (tabs.length > 1) {
@@ -71,7 +87,7 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ addTab, setTabs, setSelectedTab
   return (
     <Tabs.Root value={selectedTab}
       onValueChange={(newValue) => setSelectedTab(newValue.value)}
-      colorScheme="whiteAlpha" overflowY={"auto"} maxHeight={"600px"}>
+      colorScheme="whiteAlpha" overflowY={"auto"} maxHeight={"85vh"}>
       <Tabs.List flex="1 1 auto" bg="var(--bg-sidemenu)" border={"none"}>
         {tabs.map((item) => {
           const IconComponent = iconMapping[item.icon];
@@ -128,24 +144,12 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ addTab, setTabs, setSelectedTab
           const isAbout = item.title === "About.txt";
           const isSkillset = item.title === "Skillset.txt";
           const isSBC = item.title.split(".").pop() === "sbc";
+
+          const ProjectComponent = isSBC ? ProjectMapping[item.title] : null;
           return (
             <Tabs.Content value={item.id} key={item.id} display={"flex"} justifyContent={"center"} pt={8}>
               { isWelcome ? (
-                <Box textAlign={"center"}>
-                  <Heading size="lg" letterSpacing="tight" color={"var(--color-cyan)"}>Welcome Friend!</Heading>
-                  <Heading size="2xl" letterSpacing="tight">
-                    {item.content}
-                    <Link
-                      variant="underline"
-                      href="https://chakra-ui.com"
-                      style={{ color: 'var(--color-blue)' }}
-                      ms={4}
-                    >
-                      Basic Version
-                    </Link>
-                  </Heading>
-                  <EditorEmptyState />
-                </Box>
+              <WelcomeTab content={item.content} setSimpleFolio={setSimpleFolio} />
               ) : isAbout ? (
                 <Box w={"100%"} px={16}>
                   <Box pb={20}>
@@ -257,12 +261,10 @@ const HeaderTabs: React.FC<HeaderTabsProps> = ({ addTab, setTabs, setSelectedTab
                 </Box>
               ) : isSkillset ? (
                 <SkillsTab />
-              ) : item.title === "ReverseProxy.sbc" ? (
-                <ReverseProxy />
               ) : regex.test(item.title) ? (
                 <ImagesFullPage ImagePath={item.title} />
-              ) : isSBC ? (
-                <ImagesFullPage ImagePath={item.title} />
+              ) : isSBC && ProjectComponent ? (
+                <ProjectComponent tabs={tabs} setTabs={setTabs} setSelectedTab={setSelectedTab} uuid={uuid} />
               ) : (
                 <ContactTab />
               )}

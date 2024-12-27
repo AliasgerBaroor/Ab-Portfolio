@@ -8,7 +8,7 @@ import { DataListItem, DataListRoot } from "~/components/ui/data-list";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import { LuInfo } from "react-icons/lu"
-import ImagePreviewModal from "../modal/imagePreviewModal";
+import ImagePreviewModal from "../modal/ImagePreviewModal";
 
 const ContactTab = () => {
   const [code, setCode] = useState<string[]>([]);
@@ -50,7 +50,6 @@ const ContactTab = () => {
     textAlign={"start"}
     width={"100%"}
     p={4}
-    px={16}
   >
     <TopicHeader Color="blue" Icon={"RiContactsBook3Line"} HText={"Contact Me"} />
 
