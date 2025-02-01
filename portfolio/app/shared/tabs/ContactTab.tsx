@@ -1,5 +1,6 @@
 import { Heading, Box, HStack, Icon } from "@chakra-ui/react"
-import Editor from '@monaco-editor/react';
+import { lazy, Suspense } from "react"
+const Editor = lazy(() => import('@monaco-editor/react'));
 
 import { addMessage } from "~/service/addMessage"
 import TopicHeader from "../headers/TopicHeader";
@@ -56,8 +57,9 @@ const ContactTab = () => {
     <TopicMainHeading TopicText={"Use the code editor below to ask questions or share feedback about my portfolio"} TopicHighlight={["code editor", "questions", "feedback", "portfolio", "projects"]} color={"var(--color-blue)"} />
 
     <Box my={8}></Box>     
- {/* <Editor value={code.join("\r\n")} height="40vh" defaultLanguage="text" defaultValue="" onChange={(value) => handleEditorChange(value)} /> */}
-
+    <Suspense fallback={<div>Loading editor...</div>}>
+ <Editor value={code.join("\r\n")} height="40vh" defaultLanguage="text" defaultValue="" onChange={(value) => handleEditorChange(value)} />
+ </Suspense>
  <Button
         onClick={handleSubmit}
         variant={"solid"}
