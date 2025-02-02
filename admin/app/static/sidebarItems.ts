@@ -25,7 +25,7 @@ export const sidebarItems = [
         pages:  [
             {
                 title: "Contact",
-                icon: "mdi-account-outline",
+                icon: "mdi-phone-outline",
                 children: [
                     {
                         title: "Contact Add",
@@ -41,5 +41,4 @@ export const sidebarItems = [
             },
         ]
     },
-   
 ]
