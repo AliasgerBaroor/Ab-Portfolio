@@ -11,8 +11,7 @@ export const aboutItems = [
     {
         fieldValidationName: "serviceWordCarousel",
         fieldName: "Service word carousel", 
-        fieldPlaceholder: "Description...",
-        fieldType: "text",
+        fieldType: "select",
         fieldVariant: "select_field",
         fieldOptions: [
             {
@@ -103,7 +102,137 @@ export const aboutItems = [
                 label: "Robotics Engineer",
                 active: false
             }
-        ]
-    }
+        ],
+        fieldMultiple: false
+    },
 
+    {
+        fieldValidationName: "mainSocialMediaButtons",
+        fieldName: "Main social media buttons", 
+        fieldType: "select",
+        fieldVariant: "select_field",
+        fieldOptions: [
+            {
+                value: 1,
+                label: "Github",
+                active: false
+            },
+            {
+                value: 2,
+                label: "Linkedin",
+                active: false
+            },
+
+
+            {
+                value: 3,
+                label: "Twitter",
+                active: true
+            },
+
+
+            {
+                value: 4,
+                label: "Instagram",
+                active: false
+            },
+
+
+            {
+                value: 5,
+                    label: "Facebook",
+                active: false
+            },
+
+
+            {
+                value: 6,
+                label: "Youtube",
+                active: false
+            },
+
+
+            {
+                value: 7,
+                label: "Tiktok",
+                active: false
+            },
+
+
+            {
+                value: 8,
+                label: "Telegram",
+                active: false
+            },
+
+
+            {
+                value: 9,
+                label: "Whatsapp",
+                active: false
+            },
+
+
+            {
+                value: 10,
+                label: "Pinterest",
+                active: false
+            },
+
+
+            {
+                value: 11,
+                label: "Reddit",
+                active: false
+            },
+
+
+            {
+                value: 12,
+                label: "Discord",
+                active: false
+            },
+
+
+            {
+                value: 13,
+                label: "Snapchat",
+                active: false
+            },
+
+
+            {
+                value: 14,
+                label: "Tumblr",
+                active: false
+            },
+
+
+            {
+                value: 15,
+                label: "Vimeo",
+                active: false
+            }
+        ],
+        fieldMultiple: true
+    },
+
+]
+export const aboutItemsSection = [
+    {
+        fieldValidationName: "title",
+        fieldName: "Title",
+        fieldValue: "About Me",
+        fieldPlaceholder: "Title...",
+        fieldType: "text",
+        fieldVariant: "input_field"
+    },
+    {
+        fieldValidationName: "mainHeading",
+        fieldName: "Main Heading",
+        fieldValue: "I'm a software developer specialized on Web Applications",
+        fieldPlaceholder: "Main Heading...",
+        fieldType: "text",
+        fieldVariant: "input_field"
+    },
 ]

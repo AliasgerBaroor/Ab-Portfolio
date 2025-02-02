@@ -3,9 +3,12 @@
 }
 
 .large-icon {
-    font-size: 24px;
+    font-size: 32px;
 }
 .medium-icon {
+    font-size: 24px;
+}
+.small-icon {
     font-size: 16px;
 }
 

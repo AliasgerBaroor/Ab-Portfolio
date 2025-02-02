@@ -33,9 +33,9 @@ const Sidebar = () => {
                     <li className="menu-title">{item.header_name}</li>
                     {
                         item.pages.map((page, index) => (
-                            <li key={index}>
+                            <li key={index} className="ps-2">
                             <a href={`#${page.title}`}data-bs-toggle="collapse" className="d-flex align-items-center">
-                            <span className={`mdi ${page.icon} medium-icon text-mute me-2`} />
+                            <span className={`mdi ${page.icon} small-icon text-mute me-2`} />
                               <span> {page.title} </span>
                               <span className="menu-arrow" />
                             </a>
@@ -45,7 +45,7 @@ const Sidebar = () => {
                                     page.children.map((child, index) => (
                                         <li key={index}>
                                         <a className="tp-link" href={child.path}>
-                            <span className={`mdi ${child.icon} medium-icon text-mute me-2`} />
+                            <span className={`mdi ${child.icon} small-icon text-mute me-2`} />
 
                                             {child.title}</a>
                                       </li>
