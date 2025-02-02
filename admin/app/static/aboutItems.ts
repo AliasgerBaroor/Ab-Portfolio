@@ -15,67 +15,95 @@ export const aboutItems = [
         fieldType: "text",
         fieldVariant: "select_field",
         fieldOptions: [
-
             {
                 value: 1,
-                label: "Frontend Developer"
+                label: "Frontend Developer",
+                active: false
             },
             {
                 value: 2,
-                label: "Backend Developer"
+                label: "Backend Developer",
+                active: false
             },
+
             {
                 value: 3,
-                label: "Full Stack Developer"
+                label: "Full Stack Developer",
+                active: true
             },
+
             {
                 value: 4,
-                label: "UI/UX Designer"
+                label: "UI/UX Designer",
+                active: false
             },
+
             {
                 value: 5,
-                label: "Mobile Developer"
+                    label: "Mobile Developer",
+                active: false
             },
+
             {
                 value: 6,
-                label: "DevOps Engineer"
+                label: "DevOps Engineer",
+                active: false
             },
+
             {
                 value: 7,
-                label: "Cloud Engineer"
+                label: "Cloud Engineer",
+                active: false
             },
+
             {
                 value: 8,
-                label: "AI/ML Engineer"
+                label: "AI/ML Engineer",
+                active: false
             },
+
             {
                 value: 9,
-                label: "Blockchain Developer"
+                label: "Blockchain Developer",
+                active: false
             },
+
             {
                 value: 10,
-                label: "Data Scientist"
+                label: "Data Scientist",
+                active: false
             },
+
             {
                 value: 11,
-                label: "Cybersecurity Engineer"
+                label: "Cybersecurity Engineer",
+                active: false
             },
+
             {
                 value: 12,
-                label: "IoT Developer"
+                label: "IoT Developer",
+                active: false
             },
+
             {
                 value: 13,
-                label: "AR/VR Developer"
+                label: "AR/VR Developer",
+                active: false
             },
+
             {
                 value: 14,
-                label: "Quantum Computing Engineer"
+                label: "Quantum Computing Engineer",
+                active: false
             },
+
             {
                 value: 15,
-                label: "Robotics Engineer"
+                label: "Robotics Engineer",
+                active: false
             }
         ]
     }
+
 ]

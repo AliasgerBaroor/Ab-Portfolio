@@ -29,8 +29,8 @@ const Sidebar = () => {
         <ul id="side-menu">
             {
                 sidebarItems.map((item, index) => (
-                    <>
-                    <li className="menu-title" key={index}>{item.header_name}</li>
+                    <div key={index}>
+                    <li className="menu-title">{item.header_name}</li>
                     {
                         item.pages.map((page, index) => (
                             <li key={index}>
@@ -56,7 +56,7 @@ const Sidebar = () => {
                           </li>
                         ))
                     }
-                    </>
+                    </div>
                 ))
             }
         </ul>

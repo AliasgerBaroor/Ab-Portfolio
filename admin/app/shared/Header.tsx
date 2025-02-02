@@ -13,9 +13,10 @@ const Header = () => {
                     <ul className="list-unstyled topnav-menu mb-0 d-flex align-items-center">
                         <li>
                             <button className="button-toggle-menu nav-link">
-                                <i data-feather="menu" className="noti-icon" />
+                                <span className="mdi mdi-menu large-icon text-mute me-2" />
                             </button>
                         </li>
+
                         <li className="d-none d-lg-block">
                             <h5 className="mb-0">Good Morning, Aliasger</h5>
                         </li>

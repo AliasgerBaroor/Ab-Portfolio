@@ -11,16 +11,24 @@ const About = () => {
 
   const { values, handleChange, handleSubmit, handleBlur, errors, touched } = useFormik<Record<string, string>>(
     {
-      initialValues: aboutItems.reduce((acc, item) => ({
-        ...acc,
-        [item.fieldValidationName]: item.fieldValue || ''
-      }), {} as Record<string, string>),
+      initialValues: aboutItems.reduce((acc, item) => {
+        if (item.fieldVariant === "select_field") {
+          const activeOption = item.fieldOptions?.find(option => option.active);
+          acc[item.fieldValidationName] = activeOption ? activeOption.value.toString() : '';
+        } else {
+          acc[item.fieldValidationName] = item.fieldValue || '';
+        }
+        return acc;
+      }, {} as Record<string, string>),
 
       validationSchema: aboutSchema,
-      
+
       onSubmit: async () => {
-        console.log(values)
         setIsLoading(true)
+        console.log(values)
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 3000);
       },
     }
   )
@@ -68,14 +76,15 @@ const About = () => {
                     <form onSubmit={handleSubmit}>
                       {
                         aboutItems.map((item) => (
-                          <div className="mb-3">
+                          <div className="mb-3" key={item.fieldName}>
                             <label htmlFor={item.fieldName} className="form-label">{item.fieldName}</label>
                             {
                               item.fieldVariant === "select_field" ? (
                                 <select name={item.fieldValidationName} className="form-select" id={item.fieldName} onChange={handleChange} onBlur={handleBlur} value={values[item.fieldValidationName]}>
                                   {
                                     item.fieldOptions?.map((option) => (
-                                      <option value={option.value}>{option.label}</option>
+                                      <option key={option.value} value={option.value}>{option.label}</option>
+
 
 
                                     ))
